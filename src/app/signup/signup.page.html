@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Tribe</ion-title>
+  </ion-toolbar>
+  <ion-item color="secondary">New User Sign Up</ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-text>
+    Thank you for deciding to join!
+    When you sign up, you will be randomly assigned to a tribe. Get to know your new friends!
+  </ion-text>
+  <ion-item><ion-label>Username/Email Address</ion-label><ion-input placeholder="Type in your username/email address here." [(ngModel)]="username"></ion-input></ion-item>
+  <ion-item><ion-label>Password</ion-label><ion-input placeholder="Type in your password here." [(ngModel)]="password"></ion-input></ion-item>
+  <ion-item><ion-button color="light" (click)="submit()">Sign Up</ion-button></ion-item>
+</ion-content>

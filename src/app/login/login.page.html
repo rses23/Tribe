@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Tribe</ion-title>
+  </ion-toolbar>
+  <ion-item color="secondary">Log In</ion-item>
+</ion-header>
+
+<ion-content >
+  <ion-item color="light">Welcome to Tribe!</ion-item> 
+  <ion-text>
+    Tribe is an app designed to help people connect more closely than most social medias. It accomplishes this by intentionally limiting the number of people you can interact with.
+    Try it out today! Sign up below, or log in if you are a current user.
+  </ion-text>
+  <ion-item><ion-label>Username/Email Address</ion-label><ion-input placeholder="Type in your username/email address here." [(ngModel)]="username"></ion-input></ion-item>
+  <ion-item><ion-label>Password</ion-label><ion-input placeholder="Type in your password here."  [(ngModel)]="password"></ion-input></ion-item>
+  <ion-item><ion-button color="light" (click)="login()">Log In</ion-button><ion-button color="light" (click)="goToSignUp()">Sign Up</ion-button></ion-item>
+
+</ion-content>
