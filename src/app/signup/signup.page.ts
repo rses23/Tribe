@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BooleanValueAccessor } from '@ionic/angular';
 
@@ -11,20 +12,27 @@ import { BooleanValueAccessor } from '@ionic/angular';
 export class SignupPage implements OnInit {
   username: any;
   password: any;
+  displayName: any;
   errored: boolean;
-  constructor(private auth: AngularFireAuth, private router: Router) { }
+  constructor(private auth: AngularFireAuth, private router: Router, private firestore: AngularFirestore) { }
 
   ngOnInit() {
     this.errored = false;
   }
 
-  errorHandler(error: any){}
+  sortingHat() {
+    this.firestore.collection<any>("tribes");
+  }
+
 
   submit() {
     this.auth.createUserWithEmailAndPassword(this.username, this.password).then(user => {
       console.log(user.user.email, user.user.uid);
       this.errored = false;
       alert("Succesfully signed up!");
+      user.user.updateProfile({
+        displayName: this.displayName
+      })
       this.router.navigate(['chat']);
     }).catch(error => {
       this.errored = true;
@@ -32,5 +40,4 @@ export class SignupPage implements OnInit {
       alert(error.message);
     });
   }
-
 }

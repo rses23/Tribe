@@ -24,5 +24,4 @@ export class ChatPage implements OnInit {
   	this.currMessage.username = user1.displayName;
   	this.firestore.collection<any>("messages").add(this.currMessage);
   }
-
 }
