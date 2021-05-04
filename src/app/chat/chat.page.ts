@@ -28,6 +28,7 @@ export class ChatPage implements OnInit {
   	this.firestore.collection<any>("messages").add(this.currMessage);
   }
 
+
   like() {
     console.log("like was clicked");
   }
