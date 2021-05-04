@@ -24,6 +24,6 @@
 
 <ion-content>
   <ion-item></ion-item>
-  <ion-textarea placeholder="Send a message!"></ion-textarea>
-  <ion-button type="submit">Send</ion-button>
+  <ion-textarea placeholder="Send a message!" [(ngModel)]="currMessage.text"></ion-textarea>
+  <ion-button type="submit"  (click)="addMessage(currMessage)">Send</ion-button>
 </ion-content>
