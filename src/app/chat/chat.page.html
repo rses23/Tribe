@@ -14,7 +14,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
       </ion-avatar>
       <ion-label>{{ message.username }}</ion-label>
-      <ion-button shape="round">{{ message.likes }} Likes</ion-button>
+      <ion-button shape="round" (click)="like()">{{ message.likes }} Likes</ion-button>
     </ion-item>
     <ion-item color="tertiary">
       {{ message.text }}
