@@ -1,25 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title size="large">
       Tribe
     </ion-title>
   </ion-toolbar>
-  <ion-item>Tribe #1 Columbia, SC</ion-item>
-  <ion-menu-button menu="first"></ion-menu-button>
+  <ion-item>Tribe #{{ this.tribeNumber }}</ion-item>
 </ion-header>
 
-
-
-<ion-content>
+<ion-content fullscreen="true">
   <ion-list *ngFor="let message of messages | async">
-    <ion-item color="tertiary" lines="none">
+    <ion-item *ngIf="message.tribeNumber == this.tribeNumber" color="tertiary" lines="none">
       <ion-avatar>
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
       </ion-avatar>
       <ion-label>{{ message.username }}</ion-label>
       <ion-button shape="round">{{ message.likes }} Likes</ion-button>
     </ion-item>
-    <ion-item color="tertiary">
+    <ion-item color="tertiary" *ngIf="message.tribeNumber == this.tribeNumber">
       {{ message.text }}
     </ion-item>
   </ion-list>
