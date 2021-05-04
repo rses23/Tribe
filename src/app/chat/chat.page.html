@@ -1,10 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title size="large">
       Tribe
     </ion-title>
   </ion-toolbar>
-  <ion-item>Tribe #{{ this.tribeNumber }}</ion-item>
+  <ion-item color="secondary"><ion-item color="secondary">Tribe #{{ this.tribeNumber }}</ion-item><ion-item slot="end" color="secondary"><ion-button (click)="editProfile()">Edit Profile</ion-button></ion-item></ion-item>
+  
 </ion-header>
 
 <ion-content fullscreen="true">
@@ -14,7 +15,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png">
       </ion-avatar>
       <ion-label>{{ message.username }}</ion-label>
-      <ion-button shape="round">{{ message.likes }} Likes</ion-button>
+      <ion-button shape="round" (click)="like(message)">{{ message.likes }} Likes</ion-button>
     </ion-item>
     <ion-item color="tertiary" *ngIf="message.tribeNumber == this.tribeNumber">
       {{ message.text }}

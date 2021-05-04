@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Tribe</ion-title>
+  </ion-toolbar>
+  <ion-item color="secondary">Edit Profile</ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-item>On this page you can change your profile name and picture, so that it better suits you.</ion-item>
+  <ion-item><ion-label>Change Profile Name</ion-label><ion-input placeholder="New Profile Name" [(ngModel)]="newProfileName"></ion-input></ion-item>
+  <ion-item><ion-label>Display Photo URL</ion-label><ion-input placeholder="New Photo URL" [(ngModel)]="newPhotoURL"></ion-input></ion-item>
+  <ion-button type="submit" (click)="submit()">Submit</ion-button>
+</ion-content>
