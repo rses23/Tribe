@@ -16,9 +16,28 @@ export class ChatPage implements OnInit {
   currMessage:Message = {username:"", text:"", likes:0, timestamp:0};
 
   constructor(private firestore: AngularFirestore) {
-     this.messages = this.firestore.collection<any>("messages").valueChanges();
-     console.log(this.messages);
-
+      var db = firebase.firestore();
+      let temp1 = Array<any>();
+      this.messages = this.firestore.collection<any>("messages").valueChanges();
+     
+      let result = db.collection('messages').get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+              temp1.push(doc.data());
+          })
+          var i, j;
+          for(i = 0; i < temp1.length-1; i++) {
+              var minIndex = i;
+              for(j = i+1; j < temp1.length; j++) {
+                  if(temp1[j].timestamp < temp1[minIndex].timestamp)
+                      minIndex = j;
+              }
+              var temp = temp1[minIndex];
+              temp1[minIndex] = temp1[i];
+              temp1[i] = temp;
+          }
+          for(i = 0; i < temp1.length; i++)
+              console.log(temp1[i].text + " ts: " + temp1[i].timestamp);
+      });
   }
 
   ngOnInit() {
