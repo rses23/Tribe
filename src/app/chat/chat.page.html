@@ -5,9 +5,12 @@
     </ion-title>
   </ion-toolbar>
   <ion-item>Tribe #1 Columbia, SC</ion-item>
+  <ion-menu-button menu="first"></ion-menu-button>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+
+<ion-content>
   <ion-list *ngFor="let message of messages | async">
     <ion-item color="tertiary" lines="none">
       <ion-avatar>
@@ -22,8 +25,10 @@
   </ion-list>
 </ion-content>
 
-<ion-content>
+<ion-footer>
   <ion-item></ion-item>
   <ion-textarea placeholder="Send a message!" [(ngModel)]="currMessage.text"></ion-textarea>
-  <ion-button type="submit" (click) = addMessage(currMessage)>Send</ion-button>
-</ion-content>
+  <ion-button type="submit"  (click)="addMessage(currMessage)">Send</ion-button>
+</ion-footer>
+
+
