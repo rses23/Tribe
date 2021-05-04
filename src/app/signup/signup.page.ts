@@ -16,11 +16,17 @@ export class SignupPage implements OnInit {
   errored: boolean;
   tribes: any;
 
-  chanceOfExistingTribe = 9; // 0 for 10%, 1 for 20%, up to 9 for 100%; the complement is chance of new tribe selection
+  chanceOfExistingTribe = 0; // 0 for 10%, 1 for 20%, up to 9 for 100%; the complement is chance of new tribe selection
+  tribeCapacity = 10; // adjust as necessary
 
   constructor(private auth: AngularFireAuth, private router: Router, private firestore: AngularFirestore, public ds: DataService) { }
 
   ngOnInit() {
+    let result = this.init();
+    this.manageTribes(result);
+  }
+
+  init() {
     this.errored = false;
     let tribes = [];
     this.firestore.collection<any>("tribes").snapshotChanges().subscribe(docs => {
@@ -34,6 +40,30 @@ export class SignupPage implements OnInit {
       })
     })
     this.tribes = tribes;
+    return tribes;
+  }
+
+  manageTribes(tribes: any[]) {
+    // when all tribes reach 50% capacity, new tribe is created
+    let atHalfCapacity: boolean = true;
+    let largestTribeNumber = 0;
+    tribes.forEach(tribe => {
+      if (tribe.tribeNumber > largestTribeNumber) {
+        largestTribeNumber = tribe.tribeNumber;
+      }
+      if (tribe.userCount < this.tribeCapacity * 0.5) {
+        atHalfCapacity = false;
+      }
+    });
+    if (atHalfCapacity) {
+      // create new tribe
+      let newTribeInfo = {
+        tribeNumber: largestTribeNumber + 1,
+        userCount: 0
+      }
+      this.firestore.collection<any>("tribes").add(newTribeInfo);
+    }
+    this.init();
   }
 
   sortingHat() {
@@ -97,7 +127,6 @@ export class SignupPage implements OnInit {
       }
     }
   }
-
 
   submit() {
     this.auth.createUserWithEmailAndPassword(this.username, this.password).then(user => {
